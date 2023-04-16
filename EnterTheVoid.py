@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# Gerenciador criado por Marcelo Rocha | m.rocha@outlook.com.br
+# Gerenciador idealizado por Marcelo Rocha | m.rocha@outlook.com.br
 
 import os
 
