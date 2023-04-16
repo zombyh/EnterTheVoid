@@ -1,4 +1,5 @@
-# Gerenciador idealizado por Marcelo Rocha | m.rocha@outlook.com.br
+#!/usr/bin/env python3
+# Gerenciador criado por Marcelo Rocha | m.rocha@outlook.com.br
 
 import os
 
@@ -30,6 +31,7 @@ def remove_packages():
 
 def clean_packages():
     os.system("sudo xbps-remove -Ooy")
+    os.system("sudo vkpurge rm all")
     print("Pacotes limpos com sucesso!")
 
 def main():
