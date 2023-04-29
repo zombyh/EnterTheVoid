@@ -34,6 +34,10 @@ def clean_packages():
     os.system("sudo vkpurge rm all")
     print("Pacotes limpos com sucesso!")
 
+def reconfigure_packages():
+    os.system("sudo xbps-reconfigure -af")
+    print("Pacotes reconfigurados com sucesso!")
+
 def main():
     while True:
         # Exibe o menu principal
@@ -43,7 +47,8 @@ def main():
         print("3 - Instalar pacotes")
         print("4 - Remover pacotes")
         print("5 - Limpar pacotes")
-        print("6 - Sair")
+        print("6 - Reconfigurar pacotes")
+        print("7 - Sair")
         choice = input("Opção: ")
 
         if choice == "1":
@@ -57,6 +62,8 @@ def main():
         elif choice == "5":
             clean_packages()
         elif choice == "6":
+            reconfigure_packages()
+        elif choice == "7":
             break
         else:
             print("Opção inválida.")
