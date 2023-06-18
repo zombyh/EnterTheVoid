@@ -8,7 +8,6 @@ def update_packages():
     os.system("update-grub")
     print("Pacotes atualizados com sucesso!")
 
-
 def search_package():
     search = input("Digite o nome do pacote: ")
     if search:
@@ -18,20 +17,17 @@ def search_package():
         else:
             print("Nenhum pacote encontrado.")
 
-
 def install_package():
     install = input("Digite o nome do pacote a ser instalado: ")
     if install:
         os.system(f"sudo xbps-install -fy {install}")
         print(f"Pacote {install} instalado com sucesso!")
 
-
 def remove_package():
     remove = input("Digite o nome do pacote a ser removido: ")
     if remove:
         os.system(f"sudo xbps-remove -fy {remove}")
         print(f"Pacote {remove} removido com sucesso!")
-
 
 def clean_packages():
     os.system("sudo xbps-remove -Ooy")
@@ -40,29 +36,24 @@ def clean_packages():
     os.system("flatpak uninstall --unused")
     print("Pacotes limpos com sucesso!")
 
-
 def reconfigure_packages():
     os.system("sudo xbps-reconfigure -af")
     print("Pacotes reconfigurados com sucesso!")
-
 
 def list_services():
     os.system("ls /etc/sv/ > /home/$USER/servicos_disponiveis.txt")
     os.system("ls /var/service/ > /home/$USER/servicos_ativos.txt")
     print("Foram criados arquivos de log na sua pasta de usuário")
 
-
 def enable_service():
     service = input("Digite o nome do serviço que deseja ativar: ")
     os.system(f"ln -s /etc/sv/{service} /var/service")
     print("Comando executado com sucesso.")
 
-
 def disable_service():
     service = input("Digite o nome do serviço que deseja desativar: ")
     os.system(f"rm -rf /var/service/{service}")
     print("Comando executado com sucesso.")
-
 
 def main():
     while True:
