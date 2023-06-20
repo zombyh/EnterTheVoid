@@ -4,45 +4,47 @@
 import os
 
 def update_packages():
-    os.system("sudo xbps-install -Suvy")
+    os.system("xbps-install -Suvy")
+    os.system("flatpak update")
     os.system("update-grub")
     print("Pacotes atualizados com sucesso!")
 
 def search_package():
     search = input("Digite o nome do pacote: ")
     if search:
-        output_search = os.popen(f"sudo xbps-query -Rs {search}").read()
+        output_search = os.popen(f"xbps-query -Rs {search}").read()
         if output_search:
             print(output_search)
         else:
-            print("Nenhum pacote encontrado.")
+            print("Nenhum pacote encontrado!")
 
 def install_package():
     install = input("Digite o nome do pacote a ser instalado: ")
     if install:
-        os.system(f"sudo xbps-install -fy {install}")
-        print(f"Pacote {install} instalado com sucesso!")
+        os.system(f"xbps-install -fy {install}")
+        print(f"Comando executado com sucesso!")
 
 def remove_package():
     remove = input("Digite o nome do pacote a ser removido: ")
     if remove:
         os.system(f"sudo xbps-remove -fy {remove}")
-        print(f"Pacote {remove} removido com sucesso!")
+        print(f"Comando executado com sucesso!")
 
 def clean_packages():
-    os.system("sudo xbps-remove -Ooy")
-    os.system("sudo vkpurge rm all")
+    os.system("xbps-remove -Ooy")
+    os.system("vkpurge rm all")
     os.system("rm /var/cache/xbps/*")
     os.system("flatpak uninstall --unused")
     print("Pacotes limpos com sucesso!")
 
 def reconfigure_packages():
-    os.system("sudo xbps-reconfigure -af")
+    os.system("xbps-reconfigure -af")
     print("Pacotes reconfigurados com sucesso!")
 
-def list_services():
-    os.system("ls /etc/sv/ > /home/$USER/servicos_disponiveis.txt")
-    os.system("ls /var/service/ > /home/$USER/servicos_ativos.txt")
+def list_services(): 
+    usuario = input("Digite seu nome de usuário:")
+    os.system(f"ls /etc/sv/ > /home/{usuario}/servicos_disponiveis.txt")
+    os.system(f"ls /var/service/ > /home/{usuario}/servicos_ativos.txt")
     print("Foram criados arquivos de log na sua pasta de usuário")
 
 def enable_service():
