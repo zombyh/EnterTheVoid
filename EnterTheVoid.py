@@ -1,13 +1,14 @@
-#!/usr/bin/env python3
 # Gerenciador criado por Marcelo Rocha | m.rocha@outlook.com.br
 
 import os
+
 
 def update_packages():
     os.system("xbps-install -Suvy")
     os.system("flatpak update")
     os.system("update-grub")
     print("Pacotes atualizados com sucesso!")
+
 
 def search_package():
     search = input("Digite o nome do pacote: ")
@@ -18,17 +19,24 @@ def search_package():
         else:
             print("Nenhum pacote encontrado!")
 
-def install_package():
-    install = input("Digite o nome do pacote a ser instalado: ")
-    if install:
-        os.system(f"xbps-install -fy {install}")
-        print(f"Comando executado com sucesso!")
+
+def install_packages():
+    packages = input("Digite os nomes dos pacotes a serem instalados (separados por vírgulas): ")
+    if packages:
+        package_list = packages.split(',')
+        for package in package_list:
+            package = package.strip()
+            if package:
+                os.system(f"xbps-install -fy {package}")
+                print(f"Pacote {package} instalado com sucesso!")
+
 
 def remove_package():
     remove = input("Digite o nome do pacote a ser removido: ")
     if remove:
         os.system(f"sudo xbps-remove -fy {remove}")
         print(f"Comando executado com sucesso!")
+
 
 def clean_packages():
     os.system("xbps-remove -Ooy")
@@ -37,25 +45,30 @@ def clean_packages():
     os.system("flatpak uninstall --unused")
     print("Pacotes limpos com sucesso!")
 
+
 def reconfigure_packages():
     os.system("xbps-reconfigure -af")
-    print("Pacotes reconfigurados com sucesso!")
+    print("Pacotes reconfigurados com sucesso, favor reinicie o sistema!")
 
-def list_services(): 
+
+def list_services():
     usuario = input("Digite seu nome de usuário:")
     os.system(f"ls /etc/sv/ > /home/{usuario}/servicos_disponiveis.txt")
     os.system(f"ls /var/service/ > /home/{usuario}/servicos_ativos.txt")
     print("Foram criados arquivos de log na sua pasta de usuário")
+
 
 def enable_service():
     service = input("Digite o nome do serviço que deseja ativar: ")
     os.system(f"ln -s /etc/sv/{service} /var/service")
     print("Comando executado com sucesso.")
 
+
 def disable_service():
     service = input("Digite o nome do serviço que deseja desativar: ")
     os.system(f"rm -rf /var/service/{service}")
     print("Comando executado com sucesso.")
+
 
 def main():
     while True:
@@ -78,7 +91,7 @@ def main():
         elif choice == "2":
             search_package()
         elif choice == "3":
-            install_package()
+            install_packages()
         elif choice == "4":
             remove_package()
         elif choice == "5":
@@ -95,6 +108,7 @@ def main():
             break
         else:
             print("Opção inválida.")
+
 
 if __name__ == "__main__":
     main()
